@@ -31,4 +31,10 @@ app.put('/:acronym', (req, res) => {
     res.status(200).send(selectedTeam);
 });
 
+app.post('/', (req, res) => {
+    const newTeam = Object.keys(req.body);
+    table2024.push(newTeam);
+    res.status(200).send(newTeam);
+});
+
 app.listen(3000, () => console.log("Server is running"));
