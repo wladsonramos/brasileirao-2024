@@ -32,9 +32,16 @@ app.put('/:acronym', (req, res) => {
 });
 
 app.post('/', (req, res) => {
-    const newTeam = Object.keys(req.body);
+    const newTeam = req.body;
     table2024.push(newTeam);
     res.status(200).send(newTeam);
+});
+
+app.delete('/:acronym', (req, res) => {
+    const informedAcronym = req.params.acronym.toUpperCase();
+    const selectedTeamIndex = table2024.findIndex((t) => t.acronym === informedAcronym);
+    const teamRemoved = table2024.splice(selectedTeamIndex, 1);
+    res.status(200).send(teamRemoved);
 });
 
 app.listen(3000, () => console.log("Server is running"));
